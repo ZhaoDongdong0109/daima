@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>点名程序</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 修改样式，将按钮定位到右上角 */
+        #attendanceButton {
+            position: fixed;
+            top: 30px; /* 距离顶部的距离 */
+            right: 50px; /* 距离右侧的距离 */
+        }
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+    }
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover {
+        color: black;
+        cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+<canvas id="fireworks"></canvas>
+<canvas id="softDots"></canvas>
+<button id="frequencyButton" onclick="adjustFrequency()">调整频率</button>
+<div id="container">
+    <div id="display">点击开始</div>
+    <button id="startStopButton" onclick="toggle()">开始/停止</button>
+    <div id="other-buttons">
+        <button onclick="toggleVoice()">语音开关</button>
+        <button onclick="toggleNumberDisplay()">显示数字开关</button>
+        <button onclick="document.getElementById('fileInput').click()">导入名单</button>
+    </div>
+    <input type="file" id="fileInput" accept=".txt">
+    <div id="numberDisplay"></div>
+    <div id="result"></div>
+    <button id="rateButton" style="display: none;" onclick="showRating()">评分</button>
+    <div id="ratingModal" style="display: none;">
+        <span class="star" onclick="rate(1)">★</span>
+        <span class="star" onclick="rate(2)">★</span>
+        <span class="star" onclick="rate(3)">★</span>
+        <span class="star" onclick="rate(4)">★</span>
+        <span class="star" onclick="rate(5)">★</span>
+    </div>
+    <div id="history">
+
+<button id="attendanceButton" onclick="showAttendanceModal()">点名情况</button>
+<script type="module" src="script.js"></script>
+        <div class="history-header">抽选历史（<span id="historyCount">0</span>）</div>
+        <div id="historyItems"></div>
+    </div>
+    <div id="attendanceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAttendanceModal()">&times;</span>
+            <h2>点名历史及评分</h2>
+            <div id="attendanceHistoryContent"></div>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+
+</html>
